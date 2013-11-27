@@ -1,8 +1,7 @@
 ;; Set color theme
-(add-to-list 'load-path "~/.emacs.d/themes")
-(require 'color-theme)
-(load "color-theme-tango")
-(color-theme-tango)
+(require-package 'tangotango-theme)
+(load-theme 'tangotango t)
+
 (set-face-attribute 'default nil :height 120)
 
 ;; Disable menu / toolbar
