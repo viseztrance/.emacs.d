@@ -6,6 +6,7 @@
 (require 'projectile-setup)
 (require 'flycheck-setup)
 (require 'recent-files-setup)
+(require 'paredit-setup)
 (require 'tags-setup)
 
 (require 'misc-setup)
