@@ -7,6 +7,7 @@
 (require 'flycheck-setup)
 (require 'recent-files-setup)
 (require 'paredit-setup)
+(require 'multiple-cursors-setup)
 (require 'tags-setup)
 
 (require 'web-mode-setup)
