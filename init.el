@@ -10,6 +10,7 @@
 (require 'tags-setup)
 
 (require 'web-mode-setup)
+(require 'javascript-setup)
 (require 'css-setup)
 (require 'common-lisp-setup)
 
