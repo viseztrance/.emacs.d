@@ -6,6 +6,9 @@
 
 ;; Highlight matching parentheses
 (show-paren-mode t)
+(set-face-background 'show-paren-match "khaki4")
+(set-face-attribute 'show-paren-match-face nil :weight 'extra-bold)
+
 ;; Auto close matching characters
 (electric-pair-mode)
 
