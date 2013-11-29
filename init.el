@@ -1,18 +1,22 @@
 (add-to-list 'load-path "~/.emacs.d/config")
 
-(require 'package-management-setup)
-(require 'user-interface-setup)
-(require 'ido-setup)
-(require 'projectile-setup)
-(require 'flycheck-setup)
-(require 'recent-files-setup)
-(require 'paredit-setup)
-(require 'multiple-cursors-setup)
-(require 'tags-setup)
+(defun load-settings (&rest files)
+  (dolist (current-file files)
+    (require (intern (format "%s-setup" current-file)))))
 
-(require 'web-mode-setup)
-(require 'javascript-setup)
-(require 'css-setup)
-(require 'common-lisp-setup)
+(load-settings "package-management"
+               "user-interface"
+               "ido"
+               "projectile"
+               "flycheck"
+               "recent-files"
+               "paredit"
+               "multiple-cursors"
+               "tags"
 
-(require 'misc-setup)
+               "web-mode"
+               "javascript"
+               "css"
+               "common-lisp"
+
+               "misc")
