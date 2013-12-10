@@ -7,6 +7,7 @@
 (load-settings "package-management"
                "user-interface"
                "ido"
+               "git"
                "projectile"
                "flycheck"
                "recent-files"
