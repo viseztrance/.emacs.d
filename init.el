@@ -14,6 +14,7 @@
                "paredit"
                "multiple-cursors"
                "tags"
+               "company-mode"
 
                "web-mode"
                "javascript"
