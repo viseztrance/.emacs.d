@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: prototype
+# key: proto
+# --
+${1:klass}.prototype.${2:method} = function($3) {
+    $0
+};

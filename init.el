@@ -14,6 +14,7 @@
                "paredit"
                "multiple-cursors"
                "tags"
+               "yasnippet"
                "company-mode"
 
                "web-mode"
