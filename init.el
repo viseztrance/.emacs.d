@@ -20,6 +20,7 @@
                "web-mode"
                "javascript"
                "css"
+               "yaml"
                "common-lisp"
 
                "misc")
