@@ -1,6 +1,6 @@
 (require-package 'slime)
 
-(add-to-list 'auto-mode-alist '("\\.cl\\'" . lisp-mode))
+(associate-files 'lisp ".cl")
 (add-hook 'lisp-mode-hook 'slime-mode)
 
 (require 'slime-autoloads)

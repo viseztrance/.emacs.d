@@ -1,6 +1,6 @@
 (require-package 'web-mode)
 
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(associate-files 'web ".php")
 (setq web-mode-code-indent-offset 4)
 (setq web-mode-markup-indent-offset 4)
 
