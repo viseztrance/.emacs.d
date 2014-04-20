@@ -8,6 +8,15 @@
 ;; Show line numbers
 (require 'linum)
 (global-linum-mode 1)
+(setq linum-format " %2d ")
+(set-face-attribute 'linum nil
+                    :foreground "#ccc"
+                    :background "#444"
+                    :height 80
+                    :weight 'ultra-light
+                    :box nil)
+
+(set-fringe-mode 0)
 
 ;; Remove the scrollbar
 (scroll-bar-mode -1)
@@ -19,10 +28,10 @@
 (require-package 'tangotango-theme)
 (load-theme 'tangotango t)
 
-;; Set the mode line
 (set-face-attribute 'default nil :height 120)
 (set-face-background 'region "gray30")
 
+;; Set the mode line
 (make-face 'mode-line-position-face)
 (make-face 'mode-line-position-large-face)
 (make-face 'mode-line-filename-face)
@@ -30,6 +39,17 @@
 (make-face 'mode-line-readonly-filename-face)
 (make-face 'mode-line-major-mode-face)
 (make-face 'mode-line-minor-modes-face)
+
+(set-face-attribute 'mode-line nil
+                    :height 90
+                    :box nil
+                    :weight 'semi-light)
+
+(set-face-attribute 'mode-line-inactive nil
+                    :height 90
+                    :box nil
+                    :background "#333"
+                    :weight 'semi-light)
 
 (set-face-attribute 'mode-line-position-face nil
                     :foreground "dark orange")
@@ -40,6 +60,7 @@
 
 (set-face-attribute 'mode-line-filename-face nil
                     :foreground "#000"
+                    :weight 'semi-bold
                     :background "dark orange")
 
 (set-face-attribute 'mode-line-modified-filename-face nil
@@ -69,7 +90,5 @@
    (:propertize mode-name face mode-line-major-mode-face)
    (:eval (propertize (format-mode-line minor-mode-alist) 'face 'mode-line-minor-modes-face))
    (vc-mode vc-mode)))
-
-(set-face-background 'modeline-inactive "#ccc")
 
 (provide 'user-interface-setup)
