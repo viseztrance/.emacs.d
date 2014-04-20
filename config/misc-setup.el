@@ -9,9 +9,6 @@
 (set-face-background 'show-paren-match "khaki4")
 (set-face-attribute 'show-paren-match-face nil :weight 'extra-bold)
 
-;; Auto close matching characters
-(electric-pair-mode)
-
 ;; Show trailing whitespaces
 (setq-default show-trailing-whitespace t)
 (set-face-background 'trailing-whitespace "snow4")

@@ -18,7 +18,7 @@
                "projectile"
                "flycheck"
                "recent-files"
-               "paredit"
+               "smartparens"
                "multiple-cursors"
                "tags"
                "yasnippet"
