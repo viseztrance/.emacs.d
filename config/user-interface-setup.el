@@ -31,6 +31,10 @@
 (set-face-attribute 'default nil :height 120)
 (set-face-background 'region "gray30")
 
+;; Change cursor appearance
+(setq-default cursor-type 'bar)
+(set-cursor-color "navajo white")
+
 ;; Set the mode line
 (make-face 'mode-line-position-face)
 (make-face 'mode-line-position-large-face)
@@ -73,10 +77,10 @@
                     :background "darkorange4")
 
 (set-face-attribute 'mode-line-major-mode-face nil
-                    :foreground "#999")
+                    :foreground "#eee")
 
 (set-face-attribute 'mode-line-minor-modes-face nil
-                    :foreground "#555")
+                    :foreground "#777")
 
 (setq-default
  mode-line-format
