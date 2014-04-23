@@ -47,12 +47,12 @@
 (set-face-attribute 'mode-line nil
                     :height 90
                     :box nil
-                    :weight 'semi-light)
+                    :background "#111")
 
 (set-face-attribute 'mode-line-inactive nil
-                    :height 90
-                    :box nil
+                    :inherit 'mode-line
                     :background "#333"
+                    :box nil
                     :weight 'semi-light)
 
 (set-face-attribute 'mode-line-position-face nil
