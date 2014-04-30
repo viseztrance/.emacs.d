@@ -28,6 +28,6 @@
 (setq ido-use-faces nil)
 
 ;; Things get slow on large collections
-(setq flx-ido-threshhold 1250)
+(setq flx-ido-threshhold 3000)
 
 (provide 'ido-setup)
