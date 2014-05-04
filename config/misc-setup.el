@@ -16,6 +16,12 @@
 ;; Easily toggle whitespace
 (global-set-key "\C-cw" 'whitespace-mode)
 
+;; Revert file automatically, when changed outside emacs, and having no local changes
+(global-auto-revert-mode t)
+
+;; Use shorter confirmations
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
