@@ -4,6 +4,9 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Move files to trash instead of removing them
+(setq delete-by-moving-to-trash t)
+
 ;; Highlight matching parentheses
 (show-paren-mode t)
 (set-face-background 'show-paren-match "khaki4")
