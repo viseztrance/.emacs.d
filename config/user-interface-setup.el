@@ -95,4 +95,10 @@
    (:eval (propertize (format-mode-line minor-mode-alist) 'face 'mode-line-minor-modes-face))
    (vc-mode vc-mode)))
 
+;; Make active buffer stand out
+(require-package 'auto-dim-other-buffers)
+(auto-dim-other-buffers-mode t)
+(set-face-attribute 'auto-dim-other-buffers-face nil
+                    :background "#394040")
+
 (provide 'user-interface-setup)
