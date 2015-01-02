@@ -30,5 +30,6 @@
                "css"
                "yaml"
                "common-lisp"
+               "rust"
 
                "misc")
