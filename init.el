@@ -31,5 +31,6 @@
                "yaml"
                "common-lisp"
                "rust"
+               "toml"
 
                "misc")
