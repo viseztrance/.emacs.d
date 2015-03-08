@@ -1,3 +1,10 @@
+;; Use the dark gnome 3 theme
+(defun set-gtk-theme (&optional frame)
+  (let ((xid (cdr (assoc 'outer-window-id (frame-parameters frame)))))
+    (shell-command (format "xprop -f -id %s _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark'" xid))))
+(add-hook 'after-make-frame-functions 'set-gtk-theme t nil)
+(set-gtk-theme)
+
 ;; Disable menu / toolbar
 (menu-bar-mode 0)
 (tool-bar-mode 0)
