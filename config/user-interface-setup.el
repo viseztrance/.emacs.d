@@ -99,6 +99,7 @@
 (require-package 'auto-dim-other-buffers)
 (auto-dim-other-buffers-mode t)
 (set-face-attribute 'auto-dim-other-buffers-face nil
-                    :background "#394040")
+                    :background "#394040"
+                    :foreground "#ddd")
 
 (provide 'user-interface-setup)
