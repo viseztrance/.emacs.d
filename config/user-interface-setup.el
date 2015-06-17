@@ -5,6 +5,9 @@
 (add-hook 'after-make-frame-functions 'set-gtk-theme t nil)
 (set-gtk-theme)
 
+;; Start maximized
+(toggle-frame-maximized)
+
 ;; Disable menu / toolbar
 (menu-bar-mode 0)
 (tool-bar-mode 0)
