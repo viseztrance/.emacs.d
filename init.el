@@ -32,5 +32,6 @@
                "common-lisp"
                "rust"
                "toml"
+               "slim"
 
                "misc")
