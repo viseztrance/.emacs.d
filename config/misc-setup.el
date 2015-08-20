@@ -45,6 +45,6 @@
     ad-do-it))
 (ad-activate 'align-regexp)
 
-(setq-default mode-require-final-newline nil)
+(setq-default mode-require-final-newline t)
 
 (provide 'misc-setup)
