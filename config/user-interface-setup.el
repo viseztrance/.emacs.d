@@ -3,7 +3,8 @@
   (let ((xid (cdr (assoc 'outer-window-id (frame-parameters frame)))))
     (shell-command (format "xprop -f -id %s _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark'" xid))))
 (add-hook 'after-make-frame-functions 'set-gtk-theme t nil)
-(set-gtk-theme)
+(if (eq system-type 'gnu/linux)
+    (set-gtk-theme))
 
 ;; Start maximized
 (toggle-frame-maximized)
