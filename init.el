@@ -15,6 +15,7 @@
                "user-interface"
                "ido"
                "git"
+               "drag-stuff"
                "projectile"
                "flycheck"
                "recent-files"
