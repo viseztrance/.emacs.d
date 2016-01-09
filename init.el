@@ -16,7 +16,7 @@
                "ido"
                "git"
                "drag-stuff"
-               "projectile"
+               "search"
                "flycheck"
                "recent-files"
                "smartparens"
