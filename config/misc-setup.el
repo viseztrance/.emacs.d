@@ -4,6 +4,9 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Don't create lock files
+(setq create-lockfiles nil)
+
 ;; Move files to trash instead of removing them
 (setq delete-by-moving-to-trash t)
 
