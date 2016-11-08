@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: println!
+# name: println_debug
 # key: P
 # --
 println!("{:?}$1", $2);

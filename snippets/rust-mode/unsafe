@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: unsafe
+# key: u
+# --
+unsafe {
+    $1
+}
