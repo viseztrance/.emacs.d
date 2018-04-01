@@ -20,7 +20,6 @@
                "search"
                "flycheck"
                "smartparens"
-               "multiple-cursors"
                "tags"
                "yasnippet"
                "company-mode"
