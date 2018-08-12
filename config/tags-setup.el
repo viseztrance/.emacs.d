@@ -1,23 +1,13 @@
 (require-package 'etags-select)
 
-(defun create-tags (&rest extensions)
-  (let* ((root
-          (substring
-           (shell-command-to-string "git rev-parse --show-toplevel")
-           0 -1))
-         (arguments (substring
-                     (mapconcat 'identity
-                                (cl-maplist #'(lambda (extension)
-                                                (format "-o -name '*.%s'" (cl-first extension)))
-                                            extensions) " ")
-                     3))
-         (command (format "cd %s && find . %s | egrep -v '#|~' | xargs etags -f TAGS" root arguments)))
-    (shell-command command)))
+;; Don't preserve tags when moving between projects
+(setq tags-add-tables nil)
 
-(global-set-key [f8] (lambda ()
-                       (interactive)
-                       (create-tags "rb" "erb" "js" "php" "el")))
+;; Reload tags without confirmation
+(setq tags-revert-without-query 1)
+(global-set-key [f8] 'projectile-regenerate-tags)
 
+;; Jump to file directly when a single tag was found
 (setq etags-select-go-if-unambiguous t)
 
 (global-set-key (kbd "M-.") 'etags-select-find-tag-at-point)
