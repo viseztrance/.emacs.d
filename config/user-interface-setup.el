@@ -29,6 +29,16 @@
 
 (set-fringe-mode 0)
 
+;; Highlight current line number
+(require-package 'hlinum)
+(hlinum-activate)
+(set-face-attribute 'linum-highlight-face nil
+                    :foreground "#444"
+                    :background "#ccc"
+                    :height 80
+                    :weight 'semi-bold
+                    :box nil)
+
 ;; Remove the scrollbar
 (scroll-bar-mode -1)
 
