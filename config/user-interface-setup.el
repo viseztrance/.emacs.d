@@ -23,7 +23,7 @@
 (set-face-attribute 'linum nil
                     :foreground "#ccc"
                     :background "#444"
-                    :height 80
+                    :height 110
                     :weight 'ultra-light
                     :box nil)
 
@@ -35,7 +35,7 @@
 (set-face-attribute 'linum-highlight-face nil
                     :foreground "#444"
                     :background "#ccc"
-                    :height 80
+                    :height 110
                     :weight 'semi-bold
                     :box nil)
 
@@ -49,7 +49,7 @@
 (require-package 'tangotango-theme)
 (load-theme 'tangotango t)
 
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 150)
 (set-face-background 'region "gray30")
 
 ;; Change cursor appearance
@@ -66,7 +66,7 @@
 (make-face 'mode-line-minor-modes-face)
 
 (set-face-attribute 'mode-line nil
-                    :height 90
+                    :height 120
                     :box nil
                     :background "#111")
 
