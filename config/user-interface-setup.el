@@ -81,7 +81,8 @@
 
 (set-face-attribute 'mode-line-position-large-face nil
                     :inherit 'mode-line-position-face
-                    :foreground "salmon")
+                    :weight 'bold
+                    :foreground "firebrick3")
 
 (set-face-attribute 'mode-line-filename-face nil
                     :foreground "#000"
