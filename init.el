@@ -31,6 +31,7 @@
                "yaml"
                "common-lisp"
                "rust"
+               "csharp"
                "toml"
                "slim"
 
