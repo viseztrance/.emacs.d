@@ -32,6 +32,7 @@
                "common-lisp"
                "rust"
                "csharp"
+               "shader"
                "toml"
                "slim"
 
