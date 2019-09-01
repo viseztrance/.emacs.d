@@ -9,6 +9,10 @@
 ;; Start maximized
 (toggle-frame-maximized)
 
+;; Show file or buffer name in frame title bar
+(setq-default frame-title-format
+              '(:eval (if buffer-file-truename "%f" "%b")))
+
 ;; Disable menu / toolbar
 (menu-bar-mode 0)
 (tool-bar-mode 0)
