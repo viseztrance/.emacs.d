@@ -1,5 +1,18 @@
 (require-package 'etags-select)
 
+;; Don't create TAGS for certain folders
+(setq projectile-globally-ignored-directories
+      '(".git"
+        ".sass-cache"
+        "coverage"
+        "node_packages"
+        "node_modules"
+        "dist"
+        "log"
+        "tmp"
+        "vendor"
+        "build"))
+
 ;; Don't preserve tags when moving between projects
 (setq tags-add-tables nil)
 
