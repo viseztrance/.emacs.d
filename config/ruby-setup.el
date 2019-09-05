@@ -1,10 +1,6 @@
 (require-package 'ruby-tools)
-(require-package 'rvm)
 
 (require 'ruby-tools)
-
-(require 'rvm)
-(rvm-use-default)
 
 (associate-files 'ruby ".rake" ".thor" "Gemfile" "Rakefile" "Capfile" ".json.jbuilder")
 
