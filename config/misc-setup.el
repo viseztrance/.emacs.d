@@ -47,6 +47,16 @@
     ad-do-it))
 (ad-activate 'align-regexp)
 
+(if (string-equal system-type "darwin")
+  (progn
+    (setq mac-control-modifier 'control)
+    (setq mac-right-control-modifier 'left)
+    (setq mac-command-modifier 'meta)
+    (setq mac-right-command-modifier 'left)
+    (setq mac-option-modifier 'super)
+    (setq mac-right-option-modifier 'none)
+    (setq mac-function-modifier 'hyper)))
+
 (setq-default mode-require-final-newline t)
 
 (provide 'misc-setup)
