@@ -47,6 +47,10 @@
     ad-do-it))
 (ad-activate 'align-regexp)
 
+;; Move custom settings to a separate file
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+
 (if (string-equal system-type "darwin")
   (progn
     (setq mac-control-modifier 'control)
