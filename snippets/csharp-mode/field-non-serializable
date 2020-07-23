@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: field-non-serializable
+# key: fns
+# --
+[field: NonSerialized]
