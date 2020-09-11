@@ -1,4 +1,4 @@
 (require-package 'shader-mode)
-(associate-files 'shader ".shader")
+(associate-files 'shader ".shader" ".cginc")
 
 (provide 'shader-setup)
