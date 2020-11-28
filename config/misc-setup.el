@@ -61,6 +61,9 @@
     (setq mac-right-option-modifier 'none)
     (setq mac-function-modifier 'hyper)))
 
+;; Remove default minimize behaviour
+(global-unset-key (kbd "C-z"))
+
 (setq-default mode-require-final-newline t)
 
 (provide 'misc-setup)
