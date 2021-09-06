@@ -6,7 +6,7 @@
 
 (defun associate-files (mode &rest files)
   (dolist (current-file files)
-    (let ((file-match (regexp-quote (format "%s$" current-file)))
+    (let ((file-match (format "%s$" (regexp-quote (format "%s" current-file))))
           (mode-name (intern (format "%s-mode" mode))))
       (add-to-list 'auto-mode-alist
                    (cons file-match mode-name)))))
