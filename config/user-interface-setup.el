@@ -121,6 +121,15 @@
    (:eval (propertize (format-mode-line minor-mode-alist) 'face 'mode-line-minor-modes-face))
    (vc-mode vc-mode)))
 
+;; Highlight TODO strings
+(require-package 'hl-todo)
+(global-hl-todo-mode)
+(setq hl-todo-highlight-punctuation ":"
+      hl-todo-keyword-faces
+      `(("TODO"       warning bold)
+        ("FIXME"      error bold)
+        ("NOTE"       success bold)))
+
 ;; Make active buffer stand out
 (require-package 'auto-dim-other-buffers)
 (auto-dim-other-buffers-mode t)
