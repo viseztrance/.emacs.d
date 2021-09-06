@@ -34,6 +34,5 @@
                "csharp"
                "shader"
                "toml"
-               "slim"
 
                "misc")
