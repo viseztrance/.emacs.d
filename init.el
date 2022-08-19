@@ -37,3 +37,6 @@
                "toml"
 
                "misc")
+
+(if (string-equal system-type "darwin")
+    (load-settings "macos"))

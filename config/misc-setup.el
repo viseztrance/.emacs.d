@@ -51,16 +51,6 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
-(if (string-equal system-type "darwin")
-  (progn
-    (setq mac-control-modifier 'control)
-    (setq mac-right-control-modifier 'left)
-    (setq mac-command-modifier 'meta)
-    (setq mac-right-command-modifier 'left)
-    (setq mac-option-modifier 'super)
-    (setq mac-right-option-modifier 'none)
-    (setq mac-function-modifier 'hyper)))
-
 ;; Remove default minimize behaviour
 (global-unset-key (kbd "C-z"))
 
