@@ -1,4 +1,4 @@
-(require-package 'etags-select)
+(require 'etags-select)
 
 ;; Don't create TAGS for certain folders
 (setq projectile-globally-ignored-directories

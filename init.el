@@ -1,4 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/config")
+(add-to-list 'load-path "~/.emacs.d/packages")
 
 (defun load-settings (&rest files)
   (dolist (current-file files)
