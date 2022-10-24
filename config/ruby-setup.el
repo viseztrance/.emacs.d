@@ -1,3 +1,8 @@
+(require-package 'chruby)
+
+(require 'chruby)
+(chruby "ruby-3.1.2")
+
 (require-package 'ruby-tools)
 
 (require 'ruby-tools)
