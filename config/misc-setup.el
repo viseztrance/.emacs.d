@@ -35,11 +35,11 @@
 (defun untabify-buffer ()
   (interactive)
   (untabify (point-min) (point-max)))
-(add-hook 'before-save-hook '(lambda ()
-                               (progn
-                                 (delete-trailing-whitespace)
-                                 (unless (member major-mode tabbed-modes)
-                                   (untabify-buffer) ()))))
+(add-hook 'before-save-hook #'(lambda ()
+                                (progn
+                                  (delete-trailing-whitespace)
+                                  (unless (member major-mode tabbed-modes)
+                                    (untabify-buffer) ()))))
 ;; Align with spaces only
 (defadvice align-regexp (around align-regexp-with-spaces)
   "Never use tabs for alignment."

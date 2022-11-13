@@ -7,5 +7,7 @@ tramp
 recentf*
 ido.last*
 .cache
+eln-cache
+transient
 network-security.data
 custom.el
