@@ -25,6 +25,7 @@
                "yasnippet"
                "company-mode"
 
+               "markdown"
                "web-mode"
                "ruby"
                "javascript"
