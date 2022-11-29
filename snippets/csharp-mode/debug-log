@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: log
-# key: d
-# --
-UnityEngine.Debug.Log($0);
