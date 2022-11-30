@@ -1,7 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-(setq recentf-save-file (concat my/cachedir "recentf"))
-
 (ido-mode t)
 (setq ido-use-faces nil)
 (setq ido-everywhere t)
@@ -18,11 +16,11 @@
                            "^session\.*"))
 
 (use-package flx-ido
+  :custom
+  (flx-ido-threshhold 3000) ; Things get slow on large collections
   :custom-face
   (flx-highlight-face ((nil :underline nil)))
   :config
-  (setq flx-ido-threshhold 3000) ; Things get slow on large collections
-  (setq ido-save-directory-list-file (concat my/cachedir "ido.last"))
   (flx-ido-mode t))
 
 (use-package ido-vertical-mode
@@ -32,8 +30,6 @@
   :bind
   ("C-," . projectile-toggle-between-implementation-and-test)
   ("C-." . projectile-find-file)
-  :init
-  (setq projectile-known-projects-file (concat my/cachedir "projectile-bookmarks.eld"))
   :config
   (projectile-mode))
 

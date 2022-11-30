@@ -86,9 +86,9 @@
        (propertize (format " %s    " project-name))))))
 
 (defun me/mode-line-calculate-project-name ()
-  (let ((actual-project-name (project-current)))
-    (when actual-project-name
-      (file-name-nondirectory (directory-file-name (project-root actual-project-name))))))
+  (let ((project-name (project-current)))
+    (when project-name
+      (file-name-nondirectory (directory-file-name (project-root project-name))))))
 
 ;; Poll git for changes (has overhead)
 (setq auto-revert-check-vc-info t)
@@ -120,14 +120,17 @@
       (when (string-match "Git\[-!:]\\(.*\\)" text)
         (match-string 1 text)))))
 
-(defun me/mode-line-align-right-spacer ()
-  (let*
-      ((branch-name (let ((actual-branch-name (me/mode-line-calculate-branch-name)))
-                      (if actual-branch-name (format "        %s" actual-branch-name) "")))
-       (project-name (let ((actual-project-name (me/mode-line-calculate-project-name)))
-                       (if (string-equal actual-project-name "-") "" (format "   %s" actual-project-name))))
-       ;; The modeline fonts have a different size than the buffer, so we need to adjust using the size ratio
-       (right-items-size (* (string-width (concat project-name branch-name)) me/mode-line-font-ratio)))
+(defun me/mode-line-visible-branch-name ()
+  (let ((branch-name (me/mode-line-calculate-branch-name)))
+    (if branch-name (format "        %s" branch-name) "")))
+
+(defun me/mode-line-visible-project-name ()
+  (let ((project-name (me/mode-line-calculate-project-name)))
+    (if project-name (format "   %s" project-name) "")))
+
+(defun me/mode-line-align-right-spacer (&rest items)
+  ;; The modeline fonts have a different size than the buffer, so we need to adjust using the size ratio
+  (let ((right-items-size (* (string-width (apply 'concat items)) me/mode-line-font-ratio)))
     (propertize " "
                 'display `((space :align-to (- (+ right right-fringe right-margin) ,right-items-size))))))
 
@@ -135,7 +138,9 @@
               '("%e" (:eval (concat
                              (me/mode-line-buffer-name)
                              (me/mode-line-loc)
-                             (me/mode-line-align-right-spacer)
+                             (me/mode-line-align-right-spacer
+                              (me/mode-line-visible-branch-name)
+                              (me/mode-line-visible-project-name))
                              (me/mode-line-project-name)
                              (me/mode-line-version-control)))))
 (provide 'modeline-setup)

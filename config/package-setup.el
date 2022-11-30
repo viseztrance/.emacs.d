@@ -14,4 +14,6 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
+(use-package no-littering)
+
 (provide 'package-setup)

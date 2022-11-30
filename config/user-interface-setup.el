@@ -77,18 +77,10 @@
 (use-package tangotango-theme
   :custom-face
   (default ((nil :height 150)))
+  (region ((nil :background "gray30")))
+  (highlight ((nil :inherit 'region :foreground "#2e3434" :background "dark orange")))
   :config
-  (load-theme 'tangotango t)
-  (set-face-background 'region "gray30"))
-
-(make-face 'my/font-face-line-default)
-(make-face 'my/font-face-line-default-inactive)
-
-(set-face-attribute 'my/font-face-line-default nil
-                    :inherit 'default)
-
-(set-face-attribute 'my/font-face-line-default-inactive nil
-                    :inherit 'default)
+  (load-theme 'tangotango t))
 
 ;; Don't increase minibuffer spacing
 (defun set-bigger-spacing ()
@@ -105,22 +97,23 @@
   :init
   ;; Move cursor on first entry
   (add-hook 'emacs-startup-hook #'dashboard-section-1)
+  :custom
+  (dashboard-center-content t)
+  (dashboard-startup-banner 3)
+  (dashboard-banner-logo-title nil)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-items '((recents  . 5)
+                     (projects . 5)))
   :custom-face
-  (dashboard-heading-face ((nil :height 160 :weight bold)))
+  (dashboard-items-face ((nil (:height 160))))
   :config
-  (dashboard-setup-startup-hook)
-  (setq dashboard-center-content t)
-  (setq dashboard-startup-banner 3)
-  (setq dashboard-banner-logo-title nil)
-  (setq dashboard-set-heading-icons t)
-  (setq dashboard-set-file-icons t)
-  (setq dashboard-items '((recents  . 5)
-                          (projects . 5))))
+  (dashboard-setup-startup-hook))
 
 ;; Make active buffer stand out
 (use-package dimmer
+  :custom (dimmer-fraction 0.2)
   :config
-  (setq dimmer-fraction 0.2)
   (dimmer-configure-magit)
   (dimmer-mode t))
 

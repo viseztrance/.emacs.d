@@ -25,7 +25,11 @@
   (company-tooltip-search
    ((t (:foreground "white" :background "firebrick"))))
   (company-tooltip-search-selection
-   ((t (:inherit company-tooltip-search)))))
+   ((t (:inherit company-tooltip-search))))
+  (company-tooltip-scrollbar-thumb
+   ((t (:background "#55626f"))))
+  (company-tooltip-scrollbar-track
+   ((t (:background "slate gray")))))
 
 (use-package smartparens
   :custom-face

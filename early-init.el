@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
-(defvar my/cachedir "~/.emacs.d/transient/")
+(defvar my/cachedir (expand-file-name "var/" user-emacs-directory))
 
 ;; Change eln-cache location
 (when (boundp 'native-comp-eln-load-path)
