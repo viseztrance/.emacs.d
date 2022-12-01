@@ -5,7 +5,6 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-(setq auto-save-list-file-prefix (concat my/cachedir "auto-save-list"))
 
 ;; Don't create lock files
 (setq create-lockfiles nil)
@@ -20,6 +19,9 @@
 ;; Show trailing whitespaces
 (setq-default show-trailing-whitespace t)
 (set-face-background 'trailing-whitespace "snow4")
+
+;; Don't show whitespaces in minibuffer
+(add-hook 'minibuffer-setup-hook (lambda () (setq show-trailing-whitespace nil)))
 
 ;; Easily toggle whitespace
 (global-set-key "\C-cw" 'whitespace-mode)
@@ -62,7 +64,6 @@
 
 ;; Remeber last visited buffer location
 (save-place-mode t)
-(setq save-place-file (concat my/cachedir "places"))
 
 ;; Garbage Collector Magic Hack
 (use-package gcmh

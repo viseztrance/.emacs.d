@@ -12,5 +12,4 @@
                   "modeline"
                   "misc"
                   "navigation"
-                  "autocomplete"
                   "version-control")
