@@ -1,6 +1,15 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package ivy
+  :custom-face
+  (ivy-current-match
+   ((t (:background "#555" :foreground nil))))
+  (ivy-minibuffer-match-face-2
+   ((t (:foreground "dark orange" :background nil))))
+  (ivy-minibuffer-match-face-3
+   ((t (:inherit ivy-minibuffer-match-face-2 :background nil))))
+  (ivy-minibuffer-match-face-4
+   ((t (:inherit ivy-minibuffer-match-face-2 :background nil))))
   :custom
   ;; Don't close on backspace
   (ivy-on-del-error-function #'ignore)
@@ -17,7 +26,11 @@
 (use-package counsel
   :after (ivy)
   :bind
-  ("C-." . counsel-git)
+  (("C-." . counsel-git)
+   ;; Allow calling M-y repeatedly
+   ("M-y" . counsel-yank-pop)
+   :map ivy-minibuffer-map
+   ("M-y" . ivy-next-line-call))
   :config (counsel-mode 1))
 
 (use-package flx)
@@ -31,6 +44,9 @@
   ;; Extend current match background to window width
   (setf (alist-get 't ivy-format-functions-alist)
         #'ivy-format-function-line))
+
+(use-package all-the-icons-ivy-rich
+  :init (all-the-icons-ivy-rich-mode 1))
 
 ;; Prefer most recent commands
 (use-package ivy-prescient

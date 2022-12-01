@@ -82,6 +82,12 @@
   :config
   (load-theme 'tangotango t))
 
+;; Change minibuffer background
+(defun my/theme-minibuffer-background ()
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :background "#333"))))
+(add-hook 'minibuffer-setup-hook 'my/theme-minibuffer-background)
+
 ;; Don't increase minibuffer spacing
 (defun set-bigger-spacing ()
   (setq-local default-text-properties '(line-spacing 0.05 line-height 1.05)))

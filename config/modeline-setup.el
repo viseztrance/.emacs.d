@@ -21,8 +21,8 @@
                     :background "#111")
 (set-face-attribute 'mode-line-inactive nil
                     :inherit 'mode-line
-                    :background "#333"
-                    :box '(:line-width 1 :color "#333")
+                    :background "#232323"
+                    :box '(:line-width 1 :color "#232323")
                     :weight 'semi-light)
 
 (set-face-attribute 'my/mode-line-position-face nil
