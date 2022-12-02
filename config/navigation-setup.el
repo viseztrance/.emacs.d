@@ -27,6 +27,8 @@
   :after (ivy)
   :bind
   (("C-." . counsel-git)
+   ;; Do a ripgrep search
+   ("C-;" . counsel-rg)
    ;; Allow calling M-y repeatedly
    ("M-y" . counsel-yank-pop)
    :map ivy-minibuffer-map
@@ -60,21 +62,6 @@
         '((ivy-switch-buffer . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil))
-
-;; (ido-mode t)
-;; (setq ido-use-faces nil)
-;; (setq ido-everywhere t)
-;; (setq ido-ignore-buffers '("\\` "
-;;                            "^\*Mess"
-;;                            "^\*Back"
-;;                            ".*Completion"
-;;                            "^\*Ido"
-;;                            "^\*trace"
-;;                            "^\*compilation"
-;;                            "^\*GTAGS"
-;;                            "^\*magit-process"
-;;                            "^\*Flycheck"
-;;                            "^session\.*"))
 
 (use-package company
   :init (global-company-mode)
@@ -112,6 +99,10 @@
   :after (company)
   :config
   (company-prescient-mode 1))
+
+;; Navigate buffers using mouse keys
+(global-set-key (kbd "<mouse-9>") 'previous-buffer)
+(global-set-key (kbd "<mouse-8>") 'next-buffer)
 
 (use-package smartparens
   :custom-face
