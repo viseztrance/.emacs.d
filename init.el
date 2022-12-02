@@ -12,4 +12,6 @@
                   "modeline"
                   "misc"
                   "navigation"
-                  "version-control")
+                  "version-control"
+
+                  "ruby")

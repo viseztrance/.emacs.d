@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (use-package eglot
-  :bind ("C-x C-r" . eglot-rename)
+  :bind ("<f2>" . eglot-rename)
   :custom-face
   (eglot-highlight-symbol-face ((t (:inherit nil))))
   :config

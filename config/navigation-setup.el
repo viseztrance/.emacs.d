@@ -5,11 +5,13 @@
   (ivy-current-match
    ((t (:background "#555" :foreground nil))))
   (ivy-minibuffer-match-face-2
-   ((t (:foreground "dark orange" :background nil))))
+   ((t (:foreground "dark orange" :background nil :weight normal))))
   (ivy-minibuffer-match-face-3
    ((t (:inherit ivy-minibuffer-match-face-2 :background nil))))
   (ivy-minibuffer-match-face-4
    ((t (:inherit ivy-minibuffer-match-face-2 :background nil))))
+  (ivy-subdir
+   ((t (:weight normal :foreground "#729fcf"))))
   :custom
   ;; Don't close on backspace
   (ivy-on-del-error-function #'ignore)

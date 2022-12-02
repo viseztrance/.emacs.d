@@ -11,9 +11,14 @@
   (package-install 'use-package))
 
 (require 'use-package)
+
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
+(use-package use-package-ensure-system-package)
 
 (use-package no-littering)
+
+(use-package exec-path-from-shell
+  :init (exec-path-from-shell-initialize))
 
 (provide 'package-setup)
