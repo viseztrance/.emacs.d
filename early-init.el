@@ -8,9 +8,12 @@
           (concat my/cachedir "eln-cache")))
 
 ;; Visual transition is a bit jaring so we update the window size as soon as possible
-;; Start maximized
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
 ;; Disable menu / toolbar
 (menu-bar-mode 0)
 (tool-bar-mode 0)
+
+;; Remove the scrollbar
+(scroll-bar-mode -1)
+
+;; Start maximized
+(add-to-list 'default-frame-alist '(fullscreen . maximized))

@@ -51,9 +51,6 @@
                     :weight 'semi-bold
                     :box nil)
 
-;; Remove the scrollbar
-(scroll-bar-mode -1)
-
 (use-package all-the-icons
   :config
   (unless (member "all-the-icons" (font-family-list))
@@ -99,6 +96,8 @@
 (set-cursor-color "navajo white")
 (blink-cursor-mode 0)
 
+(use-package project)
+
 (use-package dashboard
   :init
   ;; Move cursor on first entry
@@ -111,6 +110,7 @@
   (dashboard-set-file-icons t)
   (dashboard-items '((recents  . 5)
                      (projects . 5)))
+  (dashboard-projects-backend 'project-el)
   :custom-face
   (dashboard-items-face ((nil (:height 160))))
   :config
