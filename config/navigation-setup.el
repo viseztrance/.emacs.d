@@ -1,5 +1,16 @@
 ;; -*- lexical-binding: t; -*-
 
+;; https://emacs.stackexchange.com/a/20980
+(defmacro ivy-quit-and-run (&rest body)
+  "Quit the minibuffer and run BODY afterwards."
+  `(progn
+     (put 'quit 'error-message "")
+     (run-at-time nil nil
+                  (lambda ()
+                    (put 'quit 'error-message "Quit")
+                    ,@body))
+     (minibuffer-keyboard-quit)))
+
 (use-package ivy
   :custom-face
   (ivy-current-match
@@ -29,11 +40,15 @@
   :after (ivy)
   :bind
   (("C-." . counsel-git)
-   ;; Do a ripgrep search
-   ("C-;" . counsel-rg)
    ;; Allow calling M-y repeatedly
    ("M-y" . counsel-yank-pop)
    :map ivy-minibuffer-map
+   ("C-." . (lambda ()
+              (interactive)
+              ;; Do a ripgrep search when calling C-. twice
+              ;; Pass over what was already typed
+              (let ((current-input (ivy--input)))
+                (ivy-quit-and-run (counsel-rg current-input)))))
    ("M-y" . ivy-next-line-call))
   :config (counsel-mode 1))
 
@@ -101,6 +116,9 @@
   :after (company)
   :config
   (company-prescient-mode 1))
+
+;; Close minibuffer with escape key
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Navigate buffers using mouse keys
 (global-set-key (kbd "<mouse-9>") 'previous-buffer)

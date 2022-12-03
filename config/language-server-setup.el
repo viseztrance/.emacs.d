@@ -1,9 +1,9 @@
 ;; -*- lexical-binding: t; -*-
-
 (use-package eglot
   :bind ("<f2>" . eglot-rename)
-  :custom-face
-  (eglot-highlight-symbol-face ((t (:inherit nil))))
+  :custom
+  ;; Highlights are too distracting
+  (eglot-ignored-server-capabilites '(:documentHighlightProvider))
   :config
   ;; Prevent "Active processes exist" message when leaving emacs
   (advice-add 'save-buffers-kill-emacs :before 'eglot-shutdown-all))
