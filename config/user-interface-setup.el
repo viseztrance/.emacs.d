@@ -34,11 +34,10 @@
 (global-display-line-numbers-mode 1)
 
 (set-face-attribute 'line-number nil
-                    :font "Cousine"
                     :foreground "#ccc"
                     :background "#444"
                     :height 110
-                    :weight 'ultra-light
+                    :weight 'regular
                     :box nil)
 
 (set-fringe-mode 0)
@@ -57,7 +56,7 @@
     (all-the-icons-install-fonts t)))
 
 ;; Install font if it does not exist
-(unless (find-font (font-spec :name "Cousine"))
+(unless (find-font (font-spec :name "Red Hat Mono"))
   (let ((font-install-directory
          (if (string-equal system-type "darwin")
              "/Library/Fonts/"
@@ -65,7 +64,7 @@
     (unless (file-directory-p font-install-directory)
       (mkdir font-install-directory t))
     (message "Copying theme fonts ...")
-    (dolist (file (directory-files "~/.emacs.d/resources/fonts/Cousine" t ".ttf"))
+    (dolist (file (directory-files "~/.emacs.d/resources/fonts/RedHatMono" t ".ttf"))
       (copy-file file (concat font-install-directory (file-name-nondirectory file))))
     (message "Refreshing font cache ...")
     (shell-command-to-string (format "fc-cache -f -v"))))
@@ -73,7 +72,7 @@
 ;; Set color theme
 (use-package tangotango-theme
   :custom-face
-  (default ((nil :height 150)))
+  (default ((nil :height 150 :font "Red Hat Mono")))
   (region ((nil :background "gray30")))
   (highlight ((nil :inherit 'region :foreground "#2e3434" :background "dark orange")))
   :config
