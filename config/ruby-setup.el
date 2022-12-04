@@ -25,4 +25,7 @@
   (ruby-insert-encoding-magic-comment nil)
   (dabbrev-abbrev-skip-leading-regexp ":"))
 
+(use-package smartparens-ruby
+  :ensure nil)
+
 (provide 'ruby-setup)

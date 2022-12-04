@@ -14,7 +14,7 @@
 
 ;; Highlight matching parentheses
 (show-paren-mode t)
-(set-face-background 'show-paren-match "khaki4")
+(set-face-background 'show-paren-match "gray30")
 
 ;; Show trailing whitespaces
 (setq-default show-trailing-whitespace t)

@@ -126,7 +126,7 @@
 
 (use-package smartparens
   :custom-face
-  (sp-pair-overlay-face ((nil :background "gray30")))
+  (sp-pair-overlay-face ((nil :inherit nil)))
   :config (smartparens-global-mode 1))
 
 ;; Treat cammel case and underscores as word separators
