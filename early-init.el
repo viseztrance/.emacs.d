@@ -1,6 +1,12 @@
 ;; -*- lexical-binding: t; -*-
 
-(defvar my/cachedir (expand-file-name "var/" user-emacs-directory))
+(defconst me/os-linux-p
+  (eq system-type 'gnu/linux))
+
+(defconst me/os-mac-p
+  (eq system-type 'darwin))
+
+(defconst my/cachedir (expand-file-name "var/" user-emacs-directory))
 
 ;; Change eln-cache location
 (when (boundp 'native-comp-eln-load-path)

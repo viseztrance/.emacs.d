@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t; -*-
 
+(use-package project
+  :bind
+  (("C-;" . project-query-replace-regexp)))
+
 ;; https://emacs.stackexchange.com/a/20980
 (defmacro ivy-quit-and-run (&rest body)
   "Quit the minibuffer and run BODY afterwards."
@@ -74,9 +78,11 @@
   (ivy-prescient-mode 1)
   ;; Store between sessions
   (prescient-persist-mode 1)
-  ;; Fuzzy autocomplete (can't be initialized earlier)
+  ;; Fuzzy autocomplete (can't be initialized earlier),
+  ;; but don't use it for ripgrep
   (setq ivy-re-builders-alist
         '((ivy-switch-buffer . ivy--regex-plus)
+          (counsel-rg . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil))
 

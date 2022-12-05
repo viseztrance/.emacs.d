@@ -28,6 +28,12 @@
 (setq-default frame-title-format
               '(:eval (if buffer-file-truename (abbreviate-file-name buffer-file-truename) "%b")))
 
+;; Use a nicer titlebar on macosx
+(use-package ns-auto-titlebar
+  :if me/os-mac-p
+  :config
+  (ns-auto-titlebar-mode))
+
 ;; Show column position
 (column-number-mode 1)
 
@@ -58,7 +64,7 @@
 ;; Install font if it does not exist
 (unless (find-font (font-spec :name "Red Hat Mono"))
   (let ((font-install-directory
-         (if (string-equal system-type "darwin")
+         (if me/os-mac-p
              "/Library/Fonts/"
            "~/.local/share/fonts/")))
     (unless (file-directory-p font-install-directory)
@@ -73,6 +79,8 @@
 (use-package tangotango-theme
   :custom-face
   (default ((nil :height 150 :font "Red Hat Mono")))
+  (font-lock-function-name-face ((nil :weight semi-bold)))
+  (font-lock-keyword-face ((nil :weight semi-bold)))
   (region ((nil :background "gray30")))
   (highlight ((nil :inherit 'region :foreground "#2e3434" :background "dark orange")))
   :config
@@ -94,8 +102,6 @@
 (setq-default cursor-type 'bar)
 (set-cursor-color "navajo white")
 (blink-cursor-mode 0)
-
-(use-package project)
 
 (use-package dashboard
   :init

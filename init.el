@@ -12,10 +12,10 @@
 
 (my/load-settings "package"
                   "language-server"
+                  "navigation"
                   "user-interface"
                   "modeline"
                   "misc"
-                  "navigation"
                   "version-control"
 
                   "ruby")

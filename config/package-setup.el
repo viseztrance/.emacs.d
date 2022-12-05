@@ -19,6 +19,7 @@
 (use-package no-littering)
 
 (use-package exec-path-from-shell
+  :if me/os-mac-p
   :init (exec-path-from-shell-initialize))
 
 (provide 'package-setup)
