@@ -1,9 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-(use-package project
-  :bind
-  (("C-;" . project-query-replace-regexp)))
-
 ;; https://emacs.stackexchange.com/a/20980
 (defmacro ivy-quit-and-run (&rest body)
   "Quit the minibuffer and run BODY afterwards."
@@ -19,12 +15,14 @@
   :custom-face
   (ivy-current-match
    ((t (:background "#555" :foreground nil))))
-  (ivy-minibuffer-match-face-2
+  (ivy-minibuffer-match-face-1
    ((t (:foreground "dark orange" :background nil :weight normal))))
+  (ivy-minibuffer-match-face-2
+   ((t (:inherit ivy-minibuffer-match-face-1 :background nil :weight normal))))
   (ivy-minibuffer-match-face-3
-   ((t (:inherit ivy-minibuffer-match-face-2 :background nil))))
+   ((t (:inherit ivy-minibuffer-match-face-1 :background nil :weight normal))))
   (ivy-minibuffer-match-face-4
-   ((t (:inherit ivy-minibuffer-match-face-2 :background nil))))
+   ((t (:inherit ivy-minibuffer-match-face-1 :background nil :weight normal))))
   (ivy-subdir
    ((t (:weight normal :foreground "#729fcf"))))
   :custom
@@ -85,6 +83,14 @@
           (counsel-rg . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil))
+
+(use-package project
+  :bind
+  (:map minibuffer-local-map
+        ("C-M-%" . (lambda ()
+                   (interactive)
+                   ;; Calling C-M-% twice does a project wide query replace
+                   (ivy-quit-and-run (call-interactively 'project-query-replace-regexp))))))
 
 (use-package company
   :init (global-company-mode)
