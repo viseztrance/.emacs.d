@@ -1,19 +1,31 @@
-(require-package 'chruby)
+;; -*- lexical-binding: t; -*-
 
-(require 'chruby)
-(chruby "ruby-3.1.2")
+(setq my/ruby-preffered-version nil)
 
-(require-package 'ruby-tools)
+(defun my/ruby-version-from-project ()
+  (let ((file (chruby--locate-file ".ruby-version")))
+    (if file (chruby--read-version-from-file file))))
 
-(require 'ruby-tools)
+(defun my/ruby-latest-installed-version ()
+  (car (chruby--available-names)))
 
-(associate-files 'ruby ".rake" ".thor" "Gemfile" "Rakefile" "Capfile" ".json.jbuilder")
-(setq ruby-insert-encoding-magic-comment nil)
+(use-package chruby
+  :config
+  (chruby (or
+           my/ruby-preffered-version
+           (my/ruby-version-from-project)
+           (my/ruby-latest-installed-version))))
 
-;; Indent files automatically
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (local-set-key "\r" 'newline-and-indent)
-            (setq-local dabbrev-abbrev-skip-leading-regexp ":")))
+(use-package ruby-mode
+  :ensure-system-package
+  ((solargraph . "gem install solargraph")
+   (rubocop . "gem install rubocop"))
+  :hook (ruby-mode . (lambda () (eglot-ensure)))
+  :custom
+  (ruby-insert-encoding-magic-comment nil)
+  (dabbrev-abbrev-skip-leading-regexp ":"))
+
+(use-package smartparens-ruby
+  :ensure nil)
 
 (provide 'ruby-setup)

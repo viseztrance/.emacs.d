@@ -1,140 +1,132 @@
-;; Use the dark gnome 3 theme
-(defun set-gtk-theme (&optional frame)
-  (let ((xid (cdr (assoc 'outer-window-id (frame-parameters frame)))))
-    (shell-command (format "xprop -f -id %s _GTK_THEME_VARIANT 8u -set _GTK_THEME_VARIANT 'dark'" xid))))
-(add-hook 'after-make-frame-functions 'set-gtk-theme t nil)
-(if (eq system-type 'gnu/linux)
-    (set-gtk-theme))
+;; -*- lexical-binding: t; -*-
 
-;; Start maximized
-(toggle-frame-maximized)
+;; Keep track if we're in active window,
+;; so we can set different font faces later
+;; https://emacs.stackexchange.com/a/26345
+
+(defvar my/selected-window nil)
+
+(defun my/record-selected-window ()
+  (unless (string-match "\\*Minibuf" (buffer-name))
+    (setq my/selected-window (selected-window))))
+
+(defun my/selected-window-update ()
+  (force-mode-line-update t))
+
+(defun my/selected-window-p ()
+  (eq my/selected-window (selected-window)))
+
+(defun my/selected-window-update-font-face-state (face-name)
+  (if (my/selected-window-p)
+      (intern face-name)
+    (intern (concat face-name "-inactive"))))
+
+(add-hook 'post-command-hook 'my/record-selected-window)
+(add-hook 'buffer-list-update-hook 'my/selected-window-update)
 
 ;; Show file or buffer name in frame title bar
 (setq-default frame-title-format
-              '(:eval (if buffer-file-truename "%f" "%b")))
+              '(:eval (if buffer-file-truename (abbreviate-file-name buffer-file-truename) "%b")))
 
-;; Disable menu / toolbar
-(menu-bar-mode 0)
-(tool-bar-mode 0)
+;; Use a nicer titlebar on macosx
+(use-package ns-auto-titlebar
+  :if me/os-mac-p
+  :config
+  (ns-auto-titlebar-mode))
 
 ;; Show column position
 (column-number-mode 1)
 
-;; Show line numbers
-(require 'linum)
-(global-linum-mode 1)
-(setq linum-format " %2d ")
-(set-face-attribute 'linum nil
+(global-display-line-numbers-mode 1)
+
+(set-face-attribute 'line-number nil
                     :foreground "#ccc"
                     :background "#444"
                     :height 110
-                    :weight 'ultra-light
+                    :weight 'regular
                     :box nil)
 
 (set-fringe-mode 0)
 
 ;; Highlight current line number
-(require-package 'hlinum)
-(hlinum-activate)
-(set-face-attribute 'linum-highlight-face nil
+(set-face-attribute 'line-number-current-line nil
                     :foreground "#444"
                     :background "#ccc"
                     :height 110
                     :weight 'semi-bold
                     :box nil)
 
-;; Remove the scrollbar
-(scroll-bar-mode -1)
+(use-package all-the-icons
+  :config
+  (unless (member "all-the-icons" (font-family-list))
+    (all-the-icons-install-fonts t)))
 
-;; Hide welcome screen
-(setq inhibit-startup-screen t)
+;; Install font if it does not exist
+(unless (find-font (font-spec :name "Red Hat Mono"))
+  (let ((font-install-directory
+         (if me/os-mac-p
+             "/Library/Fonts/"
+           "~/.local/share/fonts/")))
+    (unless (file-directory-p font-install-directory)
+      (mkdir font-install-directory t))
+    (message "Copying theme fonts ...")
+    (dolist (file (directory-files "~/.emacs.d/resources/fonts/RedHatMono" t ".ttf"))
+      (copy-file file (concat font-install-directory (file-name-nondirectory file))))
+    (message "Refreshing font cache ...")
+    (shell-command-to-string (format "fc-cache -f -v"))))
 
 ;; Set color theme
-(require-package 'tangotango-theme)
-(load-theme 'tangotango t)
+(use-package tangotango-theme
+  :custom-face
+  (default ((nil :height 150 :font "Red Hat Mono")))
+  (font-lock-function-name-face ((nil :weight semi-bold)))
+  (font-lock-keyword-face ((nil :weight semi-bold)))
+  (region ((nil :background "gray30")))
+  (highlight ((nil :inherit 'region :foreground "#2e3434" :background "dark orange")))
+  :config
+  (load-theme 'tangotango t))
 
-(set-face-attribute 'default nil :height 150)
-(set-face-background 'region "gray30")
+;; Change minibuffer background
+(defun my/theme-minibuffer-background ()
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :background "#333"))))
+(add-hook 'minibuffer-setup-hook 'my/theme-minibuffer-background)
+
+;; Don't increase minibuffer spacing
+(defun set-bigger-spacing ()
+  (setq-local default-text-properties '(line-spacing 0.05 line-height 1.05)))
+(add-hook 'text-mode-hook 'set-bigger-spacing)
+(add-hook 'prog-mode-hook 'set-bigger-spacing)
 
 ;; Change cursor appearance
 (setq-default cursor-type 'bar)
 (set-cursor-color "navajo white")
+(blink-cursor-mode 0)
 
-;; Set the mode line
-(make-face 'mode-line-position-face)
-(make-face 'mode-line-position-large-face)
-(make-face 'mode-line-filename-face)
-(make-face 'mode-line-modified-filename-face)
-(make-face 'mode-line-readonly-filename-face)
-(make-face 'mode-line-major-mode-face)
-(make-face 'mode-line-minor-modes-face)
-
-(set-face-attribute 'mode-line nil
-                    :height 120
-                    :box nil
-                    :background "#111")
-
-(set-face-attribute 'mode-line-inactive nil
-                    :inherit 'mode-line
-                    :background "#333"
-                    :box nil
-                    :weight 'semi-light)
-
-(set-face-attribute 'mode-line-position-face nil
-                    :foreground "dark orange")
-
-(set-face-attribute 'mode-line-position-large-face nil
-                    :inherit 'mode-line-position-face
-                    :weight 'bold
-                    :foreground "firebrick3")
-
-(set-face-attribute 'mode-line-filename-face nil
-                    :foreground "#000"
-                    :weight 'semi-bold
-                    :background "dark orange")
-
-(set-face-attribute 'mode-line-modified-filename-face nil
-                    :inherit 'mode-line-filename-face
-                    :foreground "#fff")
-
-(set-face-attribute 'mode-line-readonly-filename-face nil
-                    :inherit 'mode-line-filename-face
-                    :foreground "#fff"
-                    :background "darkorange4")
-
-(set-face-attribute 'mode-line-major-mode-face nil
-                    :foreground "#eee")
-
-(set-face-attribute 'mode-line-minor-modes-face nil
-                    :foreground "#777")
-
-(setq-default
- mode-line-format
- '(
-   (:eval (propertize "  %b  " 'face (cond (buffer-read-only 'mode-line-readonly-filename-face)
-                                       ((buffer-modified-p) 'mode-line-modified-filename-face)
-                                       (t 'mode-line-filename-face))))
-   (:eval (propertize " %3c  " 'face (if  (>= (current-column) 80)
-                                        'mode-line-position-large-face
-                                      'mode-line-position-face)))
-   (:propertize mode-name face mode-line-major-mode-face)
-   (:eval (propertize (format-mode-line minor-mode-alist) 'face 'mode-line-minor-modes-face))
-   (vc-mode vc-mode)))
-
-;; Highlight TODO strings
-(require-package 'hl-todo)
-(global-hl-todo-mode)
-(setq hl-todo-highlight-punctuation ":"
-      hl-todo-keyword-faces
-      `(("TODO"       warning bold)
-        ("FIXME"      error bold)
-        ("NOTE"       success bold)))
+(use-package dashboard
+  :init
+  ;; Move cursor on first entry
+  (add-hook 'emacs-startup-hook #'dashboard-section-1)
+  :custom
+  (dashboard-center-content t)
+  (dashboard-startup-banner 3)
+  (dashboard-banner-logo-title nil)
+  (dashboard-set-heading-icons t)
+  (dashboard-set-footer nil)
+  (dashboard-set-file-icons t)
+  (dashboard-items '((recents  . 5)
+                     (projects . 5)))
+  (dashboard-projects-backend 'project-el)
+  :custom-face
+  (dashboard-items-face ((nil (:height 160))))
+  :config
+  (dashboard-setup-startup-hook))
 
 ;; Make active buffer stand out
-(require-package 'auto-dim-other-buffers)
-(auto-dim-other-buffers-mode t)
-(set-face-attribute 'auto-dim-other-buffers-face nil
-                    :background "#394040"
-                    :foreground "#ddd")
+(use-package dimmer
+  :custom (dimmer-fraction 0.2)
+  :config
+  (dimmer-configure-magit)
+  (dimmer-mode t))
 
 (provide 'user-interface-setup)

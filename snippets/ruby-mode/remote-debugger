@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: remote-debugger
-# key: dd
-# --
-binding.remote_pry

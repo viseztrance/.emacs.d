@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Change backup location to the OS temp directory
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -12,11 +14,14 @@
 
 ;; Highlight matching parentheses
 (show-paren-mode t)
-(set-face-background 'show-paren-match "khaki4")
+(set-face-background 'show-paren-match "gray30")
 
 ;; Show trailing whitespaces
 (setq-default show-trailing-whitespace t)
 (set-face-background 'trailing-whitespace "snow4")
+
+;; Don't show whitespaces in minibuffer
+(add-hook 'minibuffer-setup-hook (lambda () (setq show-trailing-whitespace nil)))
 
 ;; Easily toggle whitespace
 (global-set-key "\C-cw" 'whitespace-mode)
@@ -32,14 +37,14 @@
 
 ;; Untabify file on save and delete trailing whitespace
 (setq tabbed-modes '(go-mode makefile-gmake-mode))
-(defun untabify-buffer ()
+(defun me/untabify-buffer ()
   (interactive)
   (untabify (point-min) (point-max)))
 (add-hook 'before-save-hook #'(lambda ()
                                 (progn
                                   (delete-trailing-whitespace)
                                   (unless (member major-mode tabbed-modes)
-                                    (untabify-buffer) ()))))
+                                    (me/untabify-buffer) ()))))
 ;; Align with spaces only
 (defadvice align-regexp (around align-regexp-with-spaces)
   "Never use tabs for alignment."
@@ -54,6 +59,15 @@
 ;; Remove default minimize behaviour
 (global-unset-key (kbd "C-z"))
 
+;; Files should always have a new line at the end
 (setq-default mode-require-final-newline t)
+
+;; Remeber last visited buffer location
+(save-place-mode t)
+
+;; Garbage Collector Magic Hack
+(use-package gcmh
+  :config
+  (gcmh-mode 1))
 
 (provide 'misc-setup)

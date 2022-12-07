@@ -1,13 +1,4 @@
-auto-save-list
 elpa
-projectile-bookmarks.eld
-projectile.cache
-session.*
-tramp
-recentf*
-ido.last*
-.cache
-eln-cache
-transient
-network-security.data
+etc
+var
 custom.el

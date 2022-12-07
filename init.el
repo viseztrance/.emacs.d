@@ -1,44 +1,27 @@
-(add-to-list 'load-path "~/.emacs.d/config")
-(add-to-list 'load-path "~/.emacs.d/packages")
+;; -*- lexical-binding: t; -*-
 
-(defun load-settings (&rest files)
+;; Improve startup time, we set the GC threshold high initially,
+;; and revert it back after to keep things responsive
+;; https://github.com/purcell/emacs.d/blob/master/init.el
+(let ((normal-gc-cons-threshold (* 20 1024 1024))
+      (init-gc-cons-threshold (* 128 1024 1024)))
+  (setq gc-cons-threshold init-gc-cons-threshold)
+  (add-hook 'emacs-startup-hook
+            (lambda () (setq gc-cons-threshold normal-gc-cons-threshold))))
+
+(add-to-list 'load-path "~/.emacs.d/config")
+
+(defun my/load-settings (&rest files)
   (dolist (current-file files)
     (require (intern (format "%s-setup" current-file)))))
 
-(defun associate-files (mode &rest files)
-  (dolist (current-file files)
-    (let ((file-match (format "%s$" (regexp-quote (format "%s" current-file))))
-          (mode-name (intern (format "%s-mode" mode))))
-      (add-to-list 'auto-mode-alist
-                   (cons file-match mode-name)))))
+(my/load-settings "package"
+                  "language-server"
+                  "navigation"
+                  "user-interface"
+                  "modeline"
+                  "misc"
+                  "version-control"
+                  "font-scaling"
 
-(load-settings "package-management"
-               "user-interface"
-               "ido"
-               "git"
-               "dashboard"
-               "drag-stuff"
-               "search"
-               "flycheck"
-               "smartparens"
-               "tags"
-               "yasnippet"
-               "company-mode"
-
-               "markdown"
-               "web-mode"
-               "ruby"
-               "javascript"
-               "css"
-               "yaml"
-               "common-lisp"
-               "rust"
-               "csharp"
-               "shader"
-               "toml"
-               "docker"
-
-               "misc")
-
-(if (string-equal system-type "darwin")
-    (load-settings "macos"))
+                  "ruby")

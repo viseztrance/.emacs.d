@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: using UnityEngine
-# key: ue
-# --
-using UnityEngine;
