@@ -4,25 +4,25 @@
 ;; so we can set different font faces later
 ;; https://emacs.stackexchange.com/a/26345
 
-(defvar my/selected-window nil)
+(defvar me/selected-window nil)
 
-(defun my/record-selected-window ()
+(defun me/record-selected-window ()
   (unless (string-match "\\*Minibuf" (buffer-name))
-    (setq my/selected-window (selected-window))))
+    (setq me/selected-window (selected-window))))
 
-(defun my/selected-window-update ()
+(defun me/selected-window-update ()
   (force-mode-line-update t))
 
-(defun my/selected-window-p ()
-  (eq my/selected-window (selected-window)))
+(defun me/selected-window-p ()
+  (eq me/selected-window (selected-window)))
 
-(defun my/selected-window-update-font-face-state (face-name)
-  (if (my/selected-window-p)
+(defun me/selected-window-update-font-face-state (face-name)
+  (if (me/selected-window-p)
       (intern face-name)
     (intern (concat face-name "-inactive"))))
 
-(add-hook 'post-command-hook 'my/record-selected-window)
-(add-hook 'buffer-list-update-hook 'my/selected-window-update)
+(add-hook 'post-command-hook 'me/record-selected-window)
+(add-hook 'buffer-list-update-hook 'me/selected-window-update)
 
 ;; Show file or buffer name in frame title bar
 (setq-default frame-title-format
@@ -81,16 +81,17 @@
   (default ((nil :height 150 :font "Red Hat Mono")))
   (font-lock-function-name-face ((nil :weight semi-bold)))
   (font-lock-keyword-face ((nil :weight semi-bold)))
+  (vertical-border ((nil :foreground "#111")))
   (region ((nil :background "gray30")))
   (highlight ((nil :inherit 'region :foreground "#2e3434" :background "dark orange")))
   :config
   (load-theme 'tangotango t))
 
 ;; Change minibuffer background
-(defun my/theme-minibuffer-background ()
+(defun me/theme-minibuffer-background ()
   (set (make-local-variable 'face-remapping-alist)
        '((default :background "#333"))))
-(add-hook 'minibuffer-setup-hook 'my/theme-minibuffer-background)
+(add-hook 'minibuffer-setup-hook 'me/theme-minibuffer-background)
 
 ;; Don't increase minibuffer spacing
 (defun set-bigger-spacing ()

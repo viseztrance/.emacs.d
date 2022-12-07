@@ -1,19 +1,19 @@
 ;; -*- lexical-binding: t; -*-
 
-(make-face 'my/mode-line-position-face)
-(make-face 'my/mode-line-position-face-inactive)
+(make-face 'me/mode-line-position-face)
+(make-face 'me/mode-line-position-face-inactive)
 
-(make-face 'my/mode-line-position-large-face)
-(make-face 'my/mode-line-position-large-face-inactive)
+(make-face 'me/mode-line-position-large-face)
+(make-face 'me/mode-line-position-large-face-inactive)
 
-(make-face 'my/mode-line-filename-face)
-(make-face 'my/mode-line-filename-face-inactive)
+(make-face 'me/mode-line-filename-face)
+(make-face 'me/mode-line-filename-face-inactive)
 
-(make-face 'my/mode-line-modified-filename-face)
-(make-face 'my/mode-line-modified-filename-face-inactive)
+(make-face 'me/mode-line-modified-filename-face)
+(make-face 'me/mode-line-modified-filename-face-inactive)
 
-(make-face 'my/mode-line-readonly-filename-face)
-(make-face 'my/mode-line-readonly-filename-face-inactive)
+(make-face 'me/mode-line-readonly-filename-face)
+(make-face 'me/mode-line-readonly-filename-face-inactive)
 
 (set-face-attribute 'mode-line nil
                     :height 110
@@ -25,58 +25,58 @@
                     :box '(:line-width 1 :color "#232323")
                     :weight 'semi-light)
 
-(set-face-attribute 'my/mode-line-position-face nil
+(set-face-attribute 'me/mode-line-position-face nil
                     :foreground "dark orange")
-(set-face-attribute 'my/mode-line-position-face-inactive nil
+(set-face-attribute 'me/mode-line-position-face-inactive nil
                     :foreground "#b18f65"
-                    :inherit 'my/mode-line-position-face)
+                    :inherit 'me/mode-line-position-face)
 
-(set-face-attribute 'my/mode-line-position-large-face nil
-                    :inherit 'my/mode-line-position-face
+(set-face-attribute 'me/mode-line-position-large-face nil
+                    :inherit 'me/mode-line-position-face
                     :weight 'bold
                     :foreground "firebrick3")
-(set-face-attribute 'my/mode-line-position-large-face-inactive nil
+(set-face-attribute 'me/mode-line-position-large-face-inactive nil
                     :foreground "#994c4c"
-                    :inherit 'my/mode-line-position-large-face)
+                    :inherit 'me/mode-line-position-large-face)
 
-(set-face-attribute 'my/mode-line-filename-face nil
+(set-face-attribute 'me/mode-line-filename-face nil
                     :foreground "#000"
                     :weight 'semi-bold
                     :box '(:line-width 1 :color "dark orange")
                     :background "dark orange")
-(set-face-attribute 'my/mode-line-filename-face-inactive nil
+(set-face-attribute 'me/mode-line-filename-face-inactive nil
                     :background "#b18f65"
                     :box '(:line-width 1 :color "#b18f65")
-                    :inherit 'my/mode-line-filename-face)
+                    :inherit 'me/mode-line-filename-face)
 
-(set-face-attribute 'my/mode-line-modified-filename-face nil
-                    :inherit 'my/mode-line-filename-face
+(set-face-attribute 'me/mode-line-modified-filename-face nil
+                    :inherit 'me/mode-line-filename-face
                     :foreground "#fff")
-(set-face-attribute 'my/mode-line-modified-filename-face-inactive nil
-                    :inherit 'my/mode-line-filename-face-inactive
+(set-face-attribute 'me/mode-line-modified-filename-face-inactive nil
+                    :inherit 'me/mode-line-filename-face-inactive
                     :foreground "#eee")
 
-(set-face-attribute 'my/mode-line-readonly-filename-face nil
-                    :inherit 'my/mode-line-filename-face
+(set-face-attribute 'me/mode-line-readonly-filename-face nil
+                    :inherit 'me/mode-line-filename-face
                     :foreground "#fff"
                     :box '(:line-width 1 :color "darkorange4")
                     :background "darkorange4")
-(set-face-attribute 'my/mode-line-readonly-filename-face-inactive nil
-                    :inherit 'my/mode-line-readonly-filename-face
+(set-face-attribute 'me/mode-line-readonly-filename-face-inactive nil
+                    :inherit 'me/mode-line-readonly-filename-face
                     :foreground "#ccc"
                     :box '(:line-width 1 :color "#4b3622")
                     :background "#4b3622")
 
 (defun me/mode-line-buffer-name ()
-  (propertize  "  %b  " 'face (my/selected-window-update-font-face-state
-                               (cond (buffer-read-only "my/mode-line-readonly-filename-face")
-                                     ((buffer-modified-p) "my/mode-line-modified-filename-face")
-                                     (t "my/mode-line-filename-face")))))
+  (propertize  "  %b  " 'face (me/selected-window-update-font-face-state
+                               (cond (buffer-read-only "me/mode-line-readonly-filename-face")
+                                     ((buffer-modified-p) "me/mode-line-modified-filename-face")
+                                     (t "me/mode-line-filename-face")))))
 (defun me/mode-line-loc ()
-  (propertize " %3c  " 'face (my/selected-window-update-font-face-state
+  (propertize " %3c  " 'face (me/selected-window-update-font-face-state
                               (if (>= (current-column) 80)
-                                  "my/mode-line-position-large-face"
-                                "my/mode-line-position-face"))))
+                                  "me/mode-line-position-large-face"
+                                "me/mode-line-position-face"))))
 (defun me/mode-line-project-name ()
   (let ((project-name (me/mode-line-calculate-project-name)))
     (when project-name
@@ -96,9 +96,9 @@
 (defun me/mode-line-version-control ()
   (when vc-mode
     (let* ((icon-color (cond ((string-match-p "Git:" vc-mode)
-                              (if (my/selected-window-p) "dark orange" "#c5863a"))
+                              (if (me/selected-window-p) "dark orange" "#c5863a"))
                              ((string-match-p "Git!" vc-mode)
-                              (if (my/selected-window-p) "firebrick3" "#994c4c"))
+                              (if (me/selected-window-p) "firebrick3" "#994c4c"))
                              (t "#777")))
            (branch (mapconcat 'concat (cdr (split-string vc-mode "[:-]")) "-")))
       (concat

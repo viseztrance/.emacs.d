@@ -11,11 +11,11 @@
 
 (add-to-list 'load-path "~/.emacs.d/config")
 
-(defun my/load-settings (&rest files)
+(defun me/load-settings (&rest files)
   (dolist (current-file files)
     (require (intern (format "%s-setup" current-file)))))
 
-(my/load-settings "package"
+(me/load-settings "package"
                   "language-server"
                   "navigation"
                   "user-interface"

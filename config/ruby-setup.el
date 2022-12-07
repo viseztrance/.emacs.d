@@ -1,20 +1,20 @@
 ;; -*- lexical-binding: t; -*-
 
-(setq my/ruby-preffered-version nil)
+(setq me/ruby-preffered-version nil)
 
-(defun my/ruby-version-from-project ()
+(defun me/ruby-version-from-project ()
   (let ((file (chruby--locate-file ".ruby-version")))
     (if file (chruby--read-version-from-file file))))
 
-(defun my/ruby-latest-installed-version ()
+(defun me/ruby-latest-installed-version ()
   (car (chruby--available-names)))
 
 (use-package chruby
   :config
   (chruby (or
-           my/ruby-preffered-version
-           (my/ruby-version-from-project)
-           (my/ruby-latest-installed-version))))
+           me/ruby-preffered-version
+           (me/ruby-version-from-project)
+           (me/ruby-latest-installed-version))))
 
 (use-package ruby-mode
   :ensure-system-package
