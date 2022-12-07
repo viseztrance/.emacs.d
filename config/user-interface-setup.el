@@ -112,6 +112,7 @@
   (dashboard-startup-banner 3)
   (dashboard-banner-logo-title nil)
   (dashboard-set-heading-icons t)
+  (dashboard-set-footer nil)
   (dashboard-set-file-icons t)
   (dashboard-items '((recents  . 5)
                      (projects . 5)))
