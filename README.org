@@ -1,0 +1,35 @@
+#+TITLE: Emacs Config
+#+AUTHOR: Daniel Mircea
+
+[[https://img.shields.io/badge/Linux-yes-brightgreen.svg?style=flat]]
+[[https://img.shields.io/badge/Mac-yes-brightgreen.svg?style=flat]]
+[[https://img.shields.io/badge/Windows-no-red.svg?style=flat]]
+
+This is my personal emacs configuration for Linux and Mac.
+If you find anything interesting feel free to incorporate it into your own config.
+
+** Dependencies
+| =chruby=      | Ruby version manager |
+| =ripgrep=     | Rust based grep      |
+
+** Installation
+#+BEGIN_SRC sh
+  git clone git@github.com:viseztrance/.emacs.d.git ~/.emacs.d
+#+END_SRC
+
+** Configuration
+*** Keys
+| C-.         | Find file in project            |
+| C-. C-.     | Search for text in project      |
+| C-M-%       | Regexp query replace            |
+| C-M-% C-M-% | Regexp query replace in project |
+
+*** HIDPI Scaling
+The theme customizations uses different font sizes. Adjusting them to different dpis is tricky.
+You can change ALL the font sizes by using the following in =~/.emacs.d/custom.el=
+
+#+BEGIN_SRC elisp
+  (setq me/font-scaling-ratio 1.5)
+#+END_SRC
+
+This example makes every font 50% larger.
