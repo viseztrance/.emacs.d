@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t; -*-
 
-(setq me/ruby-preffered-version nil)
+(defvar me/ruby-preffered-version nil)
 
 (defun me/ruby-version-from-project ()
   (let ((file (chruby--locate-file ".ruby-version")))

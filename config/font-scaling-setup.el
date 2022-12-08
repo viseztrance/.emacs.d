@@ -16,7 +16,5 @@
                         :height (round (* me/font-scaling-ratio (cdr face-data))))))
 
 (me/font-scaling-update-face-heights)
-(if (> me/font-scaling-ratio 1)
-    (setq dashboard-startup-banner nil))
 
 (provide 'font-scaling-setup)

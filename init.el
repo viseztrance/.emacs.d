@@ -24,4 +24,5 @@
                   "version-control"
                   "font-scaling"
 
+                  "markdown"
                   "ruby")
