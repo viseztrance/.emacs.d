@@ -80,7 +80,7 @@
   ;; but don't use it for ripgrep
   (setq ivy-re-builders-alist
         '((ivy-switch-buffer . ivy--regex-plus)
-          (counsel-rg . ivy--regex-plus)
+          (counsel-rg . regexp-quote)
           (t . ivy--regex-fuzzy)))
   (setq ivy-initial-inputs-alist nil))
 
