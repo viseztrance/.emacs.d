@@ -1,29 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-;; Keep track if we're in active window,
-;; so we can set different font faces later
-;; https://emacs.stackexchange.com/a/26345
-
-(defvar me/selected-window nil)
-
-(defun me/record-selected-window ()
-  (unless (string-match "\\*Minibuf" (buffer-name))
-    (setq me/selected-window (selected-window))))
-
-(defun me/selected-window-update ()
-  (force-mode-line-update t))
-
-(defun me/selected-window-p ()
-  (eq me/selected-window (selected-window)))
-
-(defun me/selected-window-update-font-face-state (face-name)
-  (if (me/selected-window-p)
-      (intern face-name)
-    (intern (concat face-name "-inactive"))))
-
-(add-hook 'post-command-hook 'me/record-selected-window)
-(add-hook 'buffer-list-update-hook 'me/selected-window-update)
-
 ;; Show file or buffer name in frame title bar
 (setq-default frame-title-format
               '(:eval (if buffer-file-truename (abbreviate-file-name buffer-file-truename) "%b")))

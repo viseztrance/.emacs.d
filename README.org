@@ -19,6 +19,8 @@ If you find anything interesting feel free to incorporate it into your own confi
 
 ** Configuration
 *** Keys
+| F2          | Rename var of method            |
+| F2 F2       | Rename opened file              |
 | C-.         | Find file in project            |
 | C-. C-.     | Search for text in project      |
 | C-M-%       | Regexp query replace            |

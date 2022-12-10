@@ -1,7 +1,18 @@
 ;; -*- lexical-binding: t; -*-
 
+;; Keep track if we're in active window
+;; https://emacs.stackexchange.com/a/26345
+
+(defvar me/selected-window nil)
+
+(defun me/record-selected-window ()
+  (unless (string-match "\\*Minibuf" (buffer-name))
+    (setq me/selected-window (selected-window))))
+
+(add-hook 'post-command-hook 'me/record-selected-window)
+
 ;; https://emacs.stackexchange.com/a/20980
-(defmacro ivy-quit-and-run (&rest body)
+(defmacro me/ivy-quit-and-run (&rest body)
   "Quit the minibuffer and run BODY afterwards."
   `(progn
      (put 'quit 'error-message "")
@@ -50,7 +61,7 @@
               ;; Do a ripgrep search when calling C-. twice
               ;; Pass over what was already typed
               (let ((current-input (ivy--input)))
-                (ivy-quit-and-run (counsel-rg current-input)))))
+                (me/ivy-quit-and-run (counsel-rg current-input)))))
    ("M-y" . ivy-next-line-call))
   :config (counsel-mode 1))
 
@@ -88,9 +99,9 @@
   :bind
   (:map minibuffer-local-map
         ("C-M-%" . (lambda ()
-                   (interactive)
-                   ;; Calling C-M-% twice does a project wide query replace
-                   (ivy-quit-and-run (call-interactively 'project-query-replace-regexp))))))
+                     (interactive)
+                     ;; Calling C-M-% twice does a project wide query replace
+                     (me/ivy-quit-and-run (call-interactively 'project-query-replace-regexp))))))
 
 (use-package company
   :init (global-company-mode)

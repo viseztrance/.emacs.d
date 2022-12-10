@@ -52,7 +52,7 @@
 ;; Files should always have a new line at the end
 (setq-default mode-require-final-newline t)
 
-;; Remeber last visited buffer location
+;; Remember last visited buffer location
 (save-place-mode t)
 
 ;; Garbage Collector Magic Hack

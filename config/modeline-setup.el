@@ -1,5 +1,19 @@
 ;; -*- lexical-binding: t; -*-
 
+;; Update modeline inactive face based on the active window
+(defun me/selected-window-update ()
+  (force-mode-line-update t))
+
+(defun me/selected-window-p ()
+  (eq me/selected-window (selected-window)))
+
+(defun me/selected-window-update-font-face-state (face-name)
+  (if (me/selected-window-p)
+      (intern face-name)
+    (intern (concat face-name "-inactive"))))
+
+(add-hook 'buffer-list-update-hook 'me/selected-window-update)
+
 (make-face 'me/mode-line-position-face)
 (make-face 'me/mode-line-position-face-inactive)
 
