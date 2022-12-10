@@ -79,6 +79,7 @@
 (use-package tangotango-theme
   :custom-face
   (default ((nil :height 150 :font "Red Hat Mono")))
+  (error ((t (:foreground "indian red" :weight bold))))
   (font-lock-function-name-face ((nil :weight semi-bold)))
   (font-lock-keyword-face ((nil :weight semi-bold)))
   (vertical-border ((nil :foreground "#111")))

@@ -35,16 +35,6 @@
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-;; Untabify file on save and delete trailing whitespace
-(setq tabbed-modes '(go-mode makefile-gmake-mode))
-(defun me/untabify-buffer ()
-  (interactive)
-  (untabify (point-min) (point-max)))
-(add-hook 'before-save-hook #'(lambda ()
-                                (progn
-                                  (delete-trailing-whitespace)
-                                  (unless (member major-mode tabbed-modes)
-                                    (me/untabify-buffer) ()))))
 ;; Align with spaces only
 (defadvice align-regexp (around align-regexp-with-spaces)
   "Never use tabs for alignment."
