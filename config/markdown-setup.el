@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 (use-package markdown-mode
   :bind ("<f5>" . markdown-toggle-inline-images)
   :custom

@@ -1,4 +1,13 @@
-;; Highlight TODO and similar strings
+;; -*- lexical-binding: t; -*-
+
+(use-package flycheck
+  :hook
+  (prog-mode . flycheck-mode)
+  :custom-face
+  (flycheck-error
+   ((t (:background "VioletRed4"))))
+  :config
+  (delq 'emacs-lisp-checkdoc flycheck-checkers))
 
 (make-face 'me/todo-note-face)
 (set-face-attribute 'me/todo-note-face nil
