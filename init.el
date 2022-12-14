@@ -16,6 +16,7 @@
     (require (intern (format "%s-setup" current-file)))))
 
 (me/load-settings "package"
+                  "helpers"
                   "language-server"
                   "navigation"
                   "user-interface"
